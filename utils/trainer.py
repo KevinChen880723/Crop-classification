@@ -15,7 +15,7 @@ class Trainer:
         self.dataset_train = MyDataset(cfg, is_train=True)
         self.dataset_val = MyDataset(cfg, is_train=False)
         self.dataloader_train = DataLoader(self.dataset_train, cfg['train']['batch_size'], shuffle=True)
-        self.dataloader_val = DataLoader(self.dataset_train, cfg['val']['batch_size'], shuffle=True)
+        self.dataloader_val = DataLoader(self.dataset_val, cfg['val']['batch_size'], shuffle=True)
         self.loss_function = nn.CrossEntropyLoss()
         self.model = create_model_CvT(cfg)
         self.optimizer = create_optim(cfg, self.model)
@@ -71,7 +71,7 @@ class Trainer:
                 # Accumulate accuracy
                 if len(prediction.shape) == 1:
                     prediction = torch.unsqueeze(prediction, dim=0)
-                for i in range(self.cfg['val']['batch_size']):
+                for i in range(label.shape[0]):
                     class_pred = torch.argmax(prediction[i])
                     if class_pred == label[i]:
                         correct_num += 1

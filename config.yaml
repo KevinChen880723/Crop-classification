@@ -1,5 +1,5 @@
 output:
-  output_folder: 'results/'
+  output_folder: 'results'
   description: CvT21
 train:
   batch_size: 8

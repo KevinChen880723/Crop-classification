@@ -20,6 +20,9 @@ if __name__ == "__main__":
     args = parse_args()
     with open(args.cfg) as f:
         cfg = yaml.load(f, Loader=yaml.SafeLoader)
+    
+    if not os.path.isdir("{}/{}/".format(cfg['output']['output_folder'], cfg['output']['description'])):
+        os.makedirs("{}/{}/".format(cfg['output']['output_folder'], cfg['output']['description']))
     shutil.copy(args.cfg, "{}/{}/".format(cfg['output']['output_folder'], cfg['output']['description']))
 
     trainer = Trainer(cfg)

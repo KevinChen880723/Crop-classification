@@ -1,0 +1,37 @@
+output:
+  output_folder: 'results/'
+  description: CvT21
+train:
+  batch_size: 8
+  image_size: 384
+  total_iterations: 20000
+  eval_freq: 1000
+  lr_scheduler: 
+    sched: cosine
+    warmup_epochs: 5
+    warmup_iterations: 336
+    warmup_lr: 0.000001
+    min_lr: 0.00001
+  optimizer: 
+    mode: adamW
+    lr: 0.00025
+    weight_decay: 0.1
+val:
+  batch_size: 8
+  image_size: 384
+data:
+  dataset_path: ../data/crop_data/splited_data/
+  sub_folder_train: train
+  sub_folder_val: val
+  data_format: '*.JPG'
+model:
+  num_classes: 14
+  spec:
+    DIM_EMBED: [64, 192, 384]
+    PATCH_SIZE: [7, 3, 3]
+    PATCH_STRIDE: [4, 2, 2]
+    KERNEL_QKV: [3, 3, 3]
+    STRIDE_KV: [2, 2, 2]
+    NUM_HEADS: [1, 3, 6]
+    DEPTH: [1, 4, 16]
+    MLP_RATIO: [4, 4, 4]

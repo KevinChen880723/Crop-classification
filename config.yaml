@@ -1,15 +1,21 @@
 output:
   output_folder: 'results'
   description: CvT21
+
+keep_train: true
+path_pretrained_weight: /work/kevin8ntust/Crop-classification/results/CvT21/iteration_13000.pth
+keep_train_obj: ['model', 'optimizer']  # ['model', 'optimizer', 'lr_scheduler']
+
 train:
   batch_size: 8
   image_size: 384
-  total_iterations: 20000
-  eval_freq: 1000
+  total_iterations: 150000
+  eval_freq: 10000
+  save_model_freq: 1000
   lr_scheduler: 
     sched: cosine
     warmup_epochs: 5
-    warmup_iterations: 336
+    warmup_iterations: 2500
     warmup_lr: 0.000001
     min_lr: 0.00001
   optimizer: 
